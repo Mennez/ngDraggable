@@ -38,7 +38,7 @@ angular.module("ngDraggable", [])
                 var _dragOffset = null;
 
                 var _dragEnabled = false;
-
+                var _dragEnableDelay = 1; // time in ms after the dragging gets started
                 var _pressTimer = null;
 
                 var onDragStartCallback = $parse(attrs.ngDragStart) || null;
@@ -123,7 +123,7 @@ angular.module("ngDraggable", [])
                         _pressTimer = setTimeout(function(){
                             cancelPress();
                             onlongpress(evt);
-                        },100);
+                        },_dragEnableDelay);
                         $document.on(_moveEvents, cancelPress);
                         $document.on(_releaseEvents, cancelPress);
                     }else{
