@@ -4,10 +4,15 @@
  */
 angular.module("ngDraggable", [])
     .service('ngDraggable', [function() {
+        
+        // IBM Mobile First hack :-)
+        var service = {
+            inputEvent: inputEvent
+        }
+        
+        return service;
 
-
-        var scope = this;
-        scope.inputEvent = function(event) {
+        function inputEvent(event) {
             if (angular.isDefined(event.touches)) {
                 return event.touches[0];
             }
@@ -16,7 +21,7 @@ angular.module("ngDraggable", [])
                 return event.originalEvent.touches[0];
             }
             return event;
-        };
+        }
 
     }])
     .directive('ngDrag', ['$rootScope', '$parse', '$document', '$window', 'ngDraggable', function ($rootScope, $parse, $document, $window, ngDraggable) {
